@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>auth</title>
+    <link rel="stylesheet" href="../static/css/auth.css"/>
+    <link rel="stylesheet" href="../static/css/normal.css"/>
+    <link rel="stylesheet" href="../static/css/xcConfirm.css"/>
+    <link rel="stylesheet" href="../static/css/service.css" />
+    <script type="text/javascript" src="../static/js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="../static/js/xcConfirm.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.form.js"></script>
+    <style type="text/css">
+        input[type=radio]{
+            width: 40px
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //选择口令方式未输入密码，或者其它方式未上传证书,验证用户账号的正确
+            $("#btn_in").click(function () {
+                check();
+            })
+
+            function check() {
+                var id = $("input[name='service']:checked").attr("id");
+                switch (id) {
+                     case 'searchable':
+                        window.open("http://192.168.1.104:9999/QuanWenSouSuoWeb/pages/allFiles.html");
+                        break;
+                    case 'range':
+                        //window.location.href="./range.html";
+                        window.open("http://192.168.1.106:8080/login");
+                        break;
+                    case 'vague':
+                        window.open("http://119.29.7.120:8080/ImageRetrieval/");
+                        break;
+                    case 'verifiable':
+                        window.open("http://119.29.7.120:8090/");
+                        break;
+                    case 'control':
+                        window.open("http://119.29.7.120:8000/");
+                        break;
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+<div class="page">
+
+    <!--页眉，西电图标-->
+    <header id="hder">
+        <img id="img01" src="../static/img/logo_tran@50px.png" width="359" height="80"/>
+    </header>
+    <!--页眉结束-->
+
+    <!--主体部分 -->
+    <div class="container">
+        <h1 id="title">睿云安全数据服务平台</h1>
+
+        <!--输入文本框 -->
+        <form method="post" id="input" enctype="multipart/form-data" target="nm_iframe">
+            <fieldset>
+                <h2 class="hdr-account">您订阅的服务</h2>
+                <div class="fields">
+                    <p >
+                        <input name="service" type="radio" id="searchable" checked="checked" />可搜索加密服务
+                    </p>
+                    <p >
+                        <input name="service" id="range" type="radio"/>密文区间查询服务
+                    </p>
+                    <p  >
+                        <input name="service" id="vague" type="radio"/>密文图像模糊查询与去重
+                    </p>
+                    <p >
+                        <input name="service" id="verifiable" type="radio"/>多副本数据可验证删除
+                    </p>
+                    <p >
+                        <input name="service" id="control" type="radio"/>多级访问控制服务
+                    </p>
+                </div>
+            </fieldset>
+            <!--提交按钮-->
+            <input type="button" value="进入所选服务" id="btn_in"/><!--<input type="submit" value="进入所选服务" id="btn_in"/>-->
+            <a href="newService.html"><input type="button" value="定制新的服务" id="btn_new"/></a>
+            <!--结束提交按钮-->
+
+        </form>
+        <!--结束输入文本框-->
+
+    </div>
+    <!--主体部分结束-->
+</div>
+</body>
+</html>

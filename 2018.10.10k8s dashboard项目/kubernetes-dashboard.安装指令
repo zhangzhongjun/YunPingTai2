@@ -1,0 +1,28 @@
+cd /root/mirror/
+
+kubectl delete -f kubernetes-dashboard.yaml
+
+kubectl create -f kubernetes-dashboard.yaml
+
+kubectl get services kubernetes-dashboard -n kube-system
+
+kubectl get svc --all-namespaces
+
+kubectl get pods --all-namespaces -o wide
+
+ssh root@192.168.12.107 -p 22
+
+docker container ls
+
+docker image ls
+
+kubectl proxy
+
+kubectl cluster-info
+
+kubectl delete pods <kubernetes-dashboard-6f88cd57b5-bjwms> --grace-period=0 --force
+
+kubectl delete pods <pod7> --grace-period=0 --force
+
+kubectl --namespace kube-system get po -o wide
+

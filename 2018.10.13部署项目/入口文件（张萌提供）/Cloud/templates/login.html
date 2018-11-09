@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>auth</title>
+    <link rel="stylesheet" href="../static/css/auth.css"/>
+    <link rel="stylesheet" href="../static/css/normal.css"/>
+    <link rel="stylesheet" href="../static/css/xcConfirm.css"/>
+    <script type="text/javascript" src="../static/js/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="../static/js/xcConfirm.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.form.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                check();
+            })
+            var form = document.getElementById("input");  //表单元素
+            var role = document.getElementById("role");          //身份选择内容
+            var username=document.getElementById("username");
+            var password = form.elements["password"];    //密码输入框元素
+            var temp = {
+                onOk: function (v) {
+
+                },
+                onClose: function (v) {
+
+                },
+                onCancel: function (v) {
+
+                }
+            }
+            function check(){
+                var index=role.selectedIndex;
+                if(username.value!=null && username.value!=""){
+                    if (password.value == null || password.value == "") {
+                        window.wxc.xcConfirm("请输入密码！", "error",temp);
+                        password.focus();
+                        return false;
+                    }
+                    if (role.options[index].value=="manager"){
+                        if(username.value=="admin" && password.value=="123"){
+                            window.location.href = "./controlPanel.html";
+                        }else if (username.value!="admin") {
+                            window.wxc.xcConfirm("账号不存在，请重新输入！","error",temp);
+                            password.value="";
+                            return false;
+                        }else if (password.value!="123") {
+                            window.wxc.xcConfirm("密码输入错误，请重新输入！","error",temp);
+                            password.value="";
+                            return false;
+                        }
+                    }
+                    if(role.options[index].value=="user"){
+                         if(username.value=="user"&& password.value=="123"){
+                             window.location.href = "service.html";
+                         }else if (username.value!="user") {
+                             window.wxc.xcConfirm("账号不存在，请重新输入！","error",temp);
+                             password.value="";
+                             return false;
+                         }else if (password.value!="123") {
+                             window.wxc.xcConfirm("密码输入错误，请重新输入！","error",temp);
+                             password.value = "";
+                             return false;
+                         }
+                    }
+                }
+
+            }
+        })
+    </script>
+</head>
+<body>
+<div class="page">
+
+    <!--页眉，西电图标-->
+    <header id="hder">
+        <img id="img01" src="../static/img/logo_tran@50px.png" width="359" height="80"/>
+    </header>
+    <!--页眉结束-->
+
+    <!--主体部分 -->
+    <div class="container">
+        <h1 id="title">欢迎使用睿云安全数据服务平台</h1>
+
+        <!--输入文本框 -->
+        <form method="post" id="input" enctype="multipart/form-data" target="nm_iframe">
+            <fieldset>
+                <h2 class="hdr-account">用户登录</h2>
+                <div class="fields">
+                    <p class="row">
+                        <label for="username">用户名：</label>
+                        <input type="text" id="username" name="account" class="field-large" placeholder="请输入用户名" required autofocus/>
+                    </p>
+                    <p class="row">
+                        <label for="role">用户身份：</label>
+                        <select id="role" name="role">
+                            <option value="manager">管理员</option>
+                            <option value="user">普通用户</option>
+                        </select>
+                    </p>
+                    <p class="row">
+                        <label for="password">密码：</label>
+                        <input type="password" id="password" name="password" class="field-large" placeholder="请输入密码"/>
+                    </p>
+                </div>
+            </fieldset>
+
+            <!--提交按钮-->
+            <input type="submit" value="登录" id="btn1"/>
+            <a href="register.html"><input type="button" value="注册" id="btn2"/></a>
+            <!--结束提交按钮-->
+        </form>
+        <!--结束输入文本框-->
+
+    </div>
+    <!--主体部分结束-->
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+</div>
+</body>
+</html>
